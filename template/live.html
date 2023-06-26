@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en" class="light">
+   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+        <meta charset="utf-8">
+        <link href="dist/images/logo.svg" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+        <meta name="keywords" content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+        <meta name="author" content="LEFT4CODE">
+        <title>ASATSWRS</title>
+        <link rel="stylesheet" href="{% static 'dist/css/app.css' %}" />
+    </head>
+    <!-- END: Head -->
+    <body class="py-5">
+        <!-- BEGIN: Mobile Menu -->
+        <div class="mobile-menu md:hidden">
+            <div class="mobile-menu-bar">
+                <a href="#" class="flex mr-auto">
+                    <img alt="Midone - HTML Admin Template" class="w-6" src="{% static 'dist/images/logo.svg' %}">
+                </a>
+                <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+            </div>
+            <div class="scrollable">
+                <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="x-circle" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+                <ul class="scrollable__content py-2">
+                    <li>
+                        <a href="{% url 'home' %}" class="menu ">
+                            <div class="menu__icon"> <i data-lucide="home"></i> </div>
+                            <div class="menu__title"> Dashboard </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:;" class="menu">
+                            <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                            <div class="menu__title"> Users</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recorded' %}" class="menu menu--active">
+                            <div class="menu__icon"> <i data-lucide="video"></i> </div>
+                            <div class="menu__title"> Live</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recorded' %}" class="menu">
+                            <div class="menu__icon"> <i data-lucide="video"></i> </div>
+                            <div class="menu__title"> Recorded</div>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- END: Mobile Menu -->
+        <div class="flex mt-[4.7rem] md:mt-0">
+            <!-- BEGIN: Side Menu -->
+            <nav class="side-nav">
+                <a href="#" class="intro-x flex items-center pl-5 pt-4">
+                    <img alt="Midone - HTML Admin Template" class="w-6" src="{% static 'dist/images/logo.svg' %}">
+                    <span class="hidden xl:block text-white text-lg ml-3"> ASATSWRS </span> 
+                </a>
+                <div class="side-nav__devider my-6"></div>
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}" class="side-menu ">
+                            <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                            <div class="side-menu__title">
+                                Dashboard 
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'clients' %}" class="side-menu">
+                            <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
+                            <div class="side-menu__title">
+                                Users 
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'live' %}" class="side-menu side-menu--active">
+                            <div class="side-menu__icon"> <i data-lucide="video"></i> </div>
+                            <div class="side-menu__title">
+                                Live 
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recorded' %}" class="side-menu ">
+                            <div class="side-menu__icon"> <i data-lucide="video"></i> </div>
+                            <div class="side-menu__title">
+                                Recorded 
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- END: Side Menu -->
+            <!-- BEGIN: Content -->
+            <div class="content">
+                
+                <h2 class="intro-y text-lg font-medium mt-10">
+                    Users on Live
+                </h2>
+                <div class="grid grid-cols-12 gap-6 mt-5">
+                    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+                        
+                        
+                    </div>
+                    <!-- BEGIN: Users Layout -->
+                    {% for i in lives %}
+                    <div class="intro-y col-span-12 md:col-span-6">
+                        <div class="box">
+                            <div class="flex flex-col lg:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+                                
+                                <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
+                                    <a href="#" class="font-medium">{{i.client.full_name}}</a> 
+                                    <div class="text-slate-500 text-xs mt-0.5">{{i.client.email}}</div>
+                                </div>
+                                <div class="flex -ml-2 lg:ml-0 lg:justify-end mt-3 lg:mt-0">
+                                    <a href="http://{{i.client.devive_IP}}" target="_blank" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="View"> <i class="w-3 h-3 fill-current" data-lucide="view"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- END: Users Layout -->
+                </div>
+            </div>
+            <!-- END: Content -->
+        </div>
+        
+        <!-- BEGIN: JS Assets-->
+        
+<script>
+    var link = document.getElementById("my-link");
+    var url = link.getAttribute("href");
+    if (url.includes("http")) {
+        url = url.replace(/(^\w+:|^)\/\//, '');
+        link.setAttribute("href", url);
+    }
+</script>
+        <script src="{% static 'dist/js/app.js' %}"></script>
+        <!-- END: JS Assets-->
+    </body>
+
+</html>
