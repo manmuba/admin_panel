@@ -108,7 +108,41 @@
                 
                 <div class="grid grid-cols-12 gap-6">
                     <div class="col-span-12 2xl:col-span-9">
-                        
+                        <div class="grid grid-cols-12 gap-6 mt-5">
+                            <a href="{% url 'recorded' %}" class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                                <div class="report-box zoom-in">
+                                    <div class="box p-5">
+                                        <div class="flex">
+                                            <i data-lucide="video" class="report-box__icon text-primary"></i> 
+                                        </div>
+                                        <div class="text-3xl font-medium leading-8 mt-6">{{records}}</div>
+                                        <div class="text-base text-slate-500 mt-1">Recorded Videos</div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="{% url 'clients' %}" class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                                <div class="report-box zoom-in">
+                                    <div class="box p-5">
+                                        <div class="flex">
+                                            <i data-lucide="users" class="report-box__icon text-success"></i> 
+                                        </div>
+                                        <div class="text-3xl font-medium leading-8 mt-6">{{clients}}</div>
+                                        <div class="text-base text-slate-500 mt-1">Users</div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="{% url 'live' %}" class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                                <div class="report-box zoom-in">
+                                    <div class="box p-5">
+                                        <div class="flex">
+                                            <i data-lucide="video" class="report-box__icon text-danger"></i> 
+                                        </div>
+                                        <div class="text-3xl font-medium leading-8 mt-6">{{lives}}</div>
+                                        <div class="text-base text-slate-500 mt-1">Lives</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

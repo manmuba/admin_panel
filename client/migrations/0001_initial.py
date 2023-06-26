@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('last_name', models.CharField(max_length=150)),
                 ('email', models.EmailField(max_length=254, unique=True)),
                 ('phone', models.CharField(max_length=150)),
-                ('devive_IP', models.CharField(max_length=150)),
+                ('device_IP', models.CharField(max_length=150)),
             ],
         ),
     ]

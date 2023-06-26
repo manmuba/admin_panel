@@ -6,13 +6,21 @@
    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
         <meta charset="utf-8">
-        <link href="dist/images/logo.svg" rel="shortcut icon">
+        <link href="{% static 'dist/images/logo.svg' %}" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
         <meta name="keywords" content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
         <meta name="author" content="LEFT4CODE">
         <title>ASATSWRS</title>
         <link rel="stylesheet" href="{% static 'dist/css/app.css' %}" />
+        <style>
+            #data-container{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                width: 1000px;
+                gap: 10px;
+            }
+        </style>
     </head>
     <!-- END: Head -->
     <body class="py-5">
@@ -114,22 +122,9 @@
                         
                     </div>
                     <!-- BEGIN: Users Layout -->
-                    {% for i in lives %}
-                    <div class="intro-y col-span-12 md:col-span-6">
-                        <div class="box">
-                            <div class="flex flex-col lg:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
-                                
-                                <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                                    <a href="#" class="font-medium">{{i.client.full_name}}</a> 
-                                    <div class="text-slate-500 text-xs mt-0.5">{{i.client.email}}</div>
-                                </div>
-                                <div class="flex -ml-2 lg:ml-0 lg:justify-end mt-3 lg:mt-0">
-                                    <a href="http://{{i.client.devive_IP}}" target="_blank" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="View"> <i class="w-3 h-3 fill-current" data-lucide="view"></i> </a>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="data-container" >
+                        
                     </div>
-                    {% endfor %}
                     <!-- END: Users Layout -->
                 </div>
             </div>
@@ -137,15 +132,45 @@
         </div>
         
         <!-- BEGIN: JS Assets-->
-        
-<script>
-    var link = document.getElementById("my-link");
-    var url = link.getAttribute("href");
-    if (url.includes("http")) {
-        url = url.replace(/(^\w+:|^)\/\//, '');
-        link.setAttribute("href", url);
-    }
-</script>
+        <script>
+            function loadData() {
+                fetch('/get_live_data/')
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        var html = '';
+                        
+                        for (var i = 0; i < data.data.length; i++) {
+                            
+                                html += '<div class="intro-y col-span-12 md:col-span-6">'+
+                                    '<div class="box">'+
+                                        '<div class="flex flex-col lg:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">'+
+                                            
+                                            '<div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">'+
+                                                '<a href="#" class="font-medium">' + data.data[i].client.first_name + ' ' +data.data[i].client.last_name + '</a>'+
+                                                '<div class="text-slate-500 text-xs mt-0.5">'+ data.data[i].client.email + '</div>'+
+                                            '</div>' +
+                                            '<div class="flex -ml-2 lg:ml-0 lg:justify-end mt-3 lg:mt-0">'+
+                                                '<a href="http://'+data.data[i].client.device_IP+'" target="_blank" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="View"> <i class="w-3 h-3 fill-current" data-lucide="view"></i> </a>'+
+                                            '</div></div></div></div>';
+                            
+                        }
+                        document.getElementById('data-container').innerHTML = html;
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
+            }
+            
+            // Load data initially
+            loadData();
+            
+            // Load data every 5 seconds
+            setInterval(loadData, 5000);
+                            
+                           
+        </script>
         <script src="{% static 'dist/js/app.js' %}"></script>
         <!-- END: JS Assets-->
     </body>

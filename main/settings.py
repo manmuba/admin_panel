@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-dl3d--msbopoc^gltlug$)r@0l$#d*#28&^f^4=5nk93xym27i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
